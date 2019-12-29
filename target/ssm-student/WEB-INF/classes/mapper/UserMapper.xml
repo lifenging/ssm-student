@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdpi.dao.UserDao">
+    <select id="findByUserName" resultType="User">
+        select * from user where username=#{username}
+    </select>
+
+    <select id="getAll" resultType="User">
+        select * from user where username like #{username} limit #{offset},#{pageSize}
+    </select>
+
+    <select id="getTotal" resultType="Integer">
+        select count(id) from user where username like #{username}
+    </select>
+
+    <select id="selectAll" resultType="User">
+        select * from user
+    </select>
+
+    <insert id="add">
+        insert into user(id,username,password) values (null,#{username},#{password})
+    </insert>
+
+    <update id="updateUser">
+        update user set username=#{username},password=#{password} where id=#{id}
+    </update>
+
+    <delete id="deleteUser">
+        delete from user where id in (${value})
+    </delete>
+</mapper>
